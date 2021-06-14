@@ -6,9 +6,9 @@ import DeleteButton from "./buttons/DeleteButton";
 import { DetailWrapper } from "../styles";
 import { useSelector } from "react-redux";
 
-const ProductDetail = ({ deleteProduct }) => {
-  const { productSlug } = useParams();
+const ProductDetail = () => {
   const products = useSelector((state) => state.products);
+  const { productSlug } = useParams();
   const product = products.find((product) => product.slug === productSlug);
 
   if (!product) return <Redirect to="/products" />;
@@ -20,7 +20,7 @@ const ProductDetail = ({ deleteProduct }) => {
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>{product.price} KD</p>
-      <DeleteButton productId={product.id} deleteProduct={deleteProduct} />
+      <DeleteButton productId={product.id} />
     </DetailWrapper>
   );
 };

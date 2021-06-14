@@ -4,10 +4,10 @@ import { ListWrapper } from "../styles";
 import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
-
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-const ProductList = ({ deleteProduct }) => {
+const ProductList = () => {
   const products = useSelector((state) => state.products);
 
   const [query, setQuery] = useState("");
@@ -16,17 +16,16 @@ const ProductList = ({ deleteProduct }) => {
     .filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase())
     )
-    .map((product) => (
-      <ProductItem
-        product={product}
-        key={product.id}
-        deleteProduct={deleteProduct}
-      />
-    ));
+    .map((product) => <ProductItem product={product} key={product.id} />);
 
   return (
     <div>
       <SearchBar setQuery={setQuery} />
+      <Link to="/products/FormProduct">
+        <button type="button" class="btn btn-secondary">
+          Add a Product
+        </button>
+      </Link>
       <ListWrapper>{productList}</ListWrapper>
     </div>
   );
